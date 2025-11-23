@@ -1,0 +1,18 @@
+
+{
+    "colors":{
+        "dark_background":"#1c1c1c",
+        "light_background":"#f2f2f2",
+        "light_background_sec":"#ffffff",
+        "dark_background_sec":"#262626",
+        "color_primary":"#046bd1",
+        "color_text_light":"#111111",
+        "color_text_light_sec":"#333333",
+        "color_text_dark":"#ffffff",
+        "color_text_dark_sec":"#d1d1d1"
+    },
+    "main_info":{
+        "lang":"fa",
+        "dir":"rtl"
+    }
+}

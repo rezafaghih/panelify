@@ -1,0 +1,31 @@
+
+{
+    "main_info":{
+        "title":"مدیریت وبسایت کندو",
+        "light_mode_logo":"logo_light_mode.png",
+        "dark_mode_logo":"logo_dark_mode.png"
+    },
+    "buttons": [
+    {
+      "title": "خانه",
+      "eng_title": "home",
+      "icon": "PiListDashesDuotone",
+      "path": "/",
+      "uniqID": "BUTTON-1"
+    },
+    {
+        "title": "محصولات",
+        "eng_title": "products",
+        "icon": "PiShoppingCartSimpleDuotone",
+        "path": "/products",
+        "uniqID": "BUTTON-2"
+    },
+    {
+        "title": "مقالات",
+        "eng_title": "articles",
+        "icon": "PiNotePencilDuotone",
+        "path": "/articles",
+        "uniqID": "BUTTON-3"
+    }
+  ]
+}

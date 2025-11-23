@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+#root{
+  width: 100%;
+}
+
+*{
+  font-family: font_regular;
+}
+
+
+@font-face {
+  font-family: font_regular;
+  src: url(./assets/font/font_regular.TTF);
+}
