@@ -17,7 +17,7 @@ export const Button = React.memo(({title, onClick, size = "fit",color = "bg-(--c
 
 export const EmptyButton =React.memo(({title, onClick, size = "fit",color = "(--color-primary)"})=>{
     return (
-        <button className={` border-${color} border-2 rounded-xl text-${color} ${size=="fit"?"px-2  py-3":"w-full py-3"}`} onClick={onClick}>
+        <button className={` border-${color} border-2 cursor-pointer transition-all hover:bg-${color} hover:text-white rounded-xl text-${color} ${size=="fit"?"px-2  py-3":"w-full py-3"}`} onClick={onClick}>
             {title}
         </button>
     

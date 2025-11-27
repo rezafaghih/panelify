@@ -8,6 +8,7 @@ import { GlobalManagment } from '../lib/global'
 import NotFoundPage from './pages/404'
 
 import { ModalProvider } from './components/modalProvider'
+import ProductsPage from './pages/products'
 export const GlobalContext = createContext()
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
 
           <Route element = {<Layout/>} path='/'>
             <Route index element = {<HomePage/>}/>
+            <Route path = "/products" element = {<ProductsPage/>}/>
 
           </Route>
         </Routes>
