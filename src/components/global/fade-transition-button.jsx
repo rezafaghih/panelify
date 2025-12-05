@@ -4,9 +4,9 @@
  * @param {*} param0 
  * @returns 
  */
-export const FadeTransitionButton = ({children})=>{
+export const FadeTransitionButton = ({children, onClick = null})=>{
     return (
-        <div className="
+        <div onClick={onClick} className="
         relative
         transition-all 
         cursor-pointer

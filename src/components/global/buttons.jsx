@@ -8,7 +8,15 @@ import { AiTwotoneNotification } from "react-icons/ai";
 
 export const Button = React.memo(({title, onClick, size = "fit",color = "bg-(--color-primary)"})=>{
     return (
-        <button className={` ${color} rounded-xl text-white ${size=="fit"?"px-2  py-3":"w-full py-3"}`} onClick={onClick}>
+        <button className={` ${color} rounded-xl hover:scale-105 transition-all cursor-pointer active:scale-90 text-white ${size=="fit"?"px-2  py-3":"w-full py-3"}`} onClick={onClick}>
+            {title}
+        </button>
+    )
+})
+
+export const TextButton = React.memo(({title, onClick, size = "fit",color = "text-[#f33333]"})=>{
+    return (
+        <button className={`rounded-xl hover:scale-105 transition-all cursor-pointer active:scale-90 ${color} ${size=="fit"?"px-2  py-3":"w-full py-3"}`} onClick={onClick}>
             {title}
         </button>
     )
@@ -27,7 +35,7 @@ export const ProfileButton = React.memo (({profileImage})=>{
     const [isOpen, setIsOpen] = useState(false);
     return (
         <FadeTransitionButton>
-        <div className="w-10 relative h-10 rounded-full">
+        <div className="w-10 relative h-10 z-20 rounded-full">
             <img onClick={()=>setIsOpen(!isOpen)} src = {profileImage} className="w-10 h-10 z-10 object-cover rounded-full"/>
 
             {

@@ -1,7 +1,8 @@
 import React from "react"
 import GlobalConfig from "../../configs/global.json"
+import { Link } from "react-router-dom";
 
-export const StatisticCard = React.memo(({title , theValue , description, icon, color , size = "screen"})=>{
+export const StatisticCard = React.memo(({title , theValue , description, icon, color , size = "screen", href = "#"})=>{
     let StaticSize = "";
 
     size=="xl"&&StaticSize==""?StaticSize="w-96":'';
@@ -9,7 +10,7 @@ export const StatisticCard = React.memo(({title , theValue , description, icon, 
     size=="md"&&StaticSize==""?StaticSize="w-52":'';
 
     return (
-        <div className={`${size=="screen"?"w-full":StaticSize}  p-2 bg-(--sidebar-bg) rounded-xl`}>
+        <Link to = {href} className={`${size=="screen"?"w-full":StaticSize}  p-2 bg-(--sidebar-bg) rounded-xl`}>
             <div className="w-full flex items-center justify-between" dir = {GlobalConfig.main_info.dir}>
                 <span className="text-sm text-(--color-text-sec)">
                     {title}
@@ -25,6 +26,6 @@ export const StatisticCard = React.memo(({title , theValue , description, icon, 
                     {theValue}
                 </span>
             </div>
-        </div>
+        </Link>
     )
 })
