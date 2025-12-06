@@ -5,6 +5,7 @@ import { PiUserDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { PiTicketDuotone } from "react-icons/pi";
 import { AiTwotoneNotification } from "react-icons/ai";
+import { GlobalManagment } from "../../../lib/global";
 
 export const Button = React.memo(({title, onClick, size = "fit",color = "bg-(--color-primary)"})=>{
     return (
@@ -83,3 +84,23 @@ export const ProfileButton = React.memo (({profileImage})=>{
         </FadeTransitionButton>
     )
 })
+
+export const IconButton = ({ onClick, icon, color = "#f33333" }) => {
+    const bg = GlobalManagment.applyOpacity(color, 0.2);
+  
+    return (
+      <button
+        style={{
+          backgroundColor: bg,
+          color: color,
+        }}
+        className="
+          rounded-xl hover:scale-105 transition-all text-2xl flex items-center justify-center cursor-pointer active:scale-90
+          w-10 h-10
+        "
+        onClick={onClick}
+      >
+        {icon}
+      </button>
+    );
+  };

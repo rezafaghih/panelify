@@ -19,6 +19,10 @@ import Highlight from "@tiptap/extension-highlight";
 import { HexColorPicker } from "react-colorful";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { ImLtr, ImRtl } from "react-icons/im";
+import { FileUploader, ImageUploader } from "./uploader";
+
+import ImageResize from "tiptap-extension-resize-image";
+
 
 
 export default function TextEditor({ value, onChange }) {
@@ -29,14 +33,19 @@ export default function TextEditor({ value, onChange }) {
     const editor = useEditor({
         extensions: [
           StarterKit,
-          Image,
-          Link,
+          Image.extend({ inline: false }), // حتماً قبل از ImageResize
+          ImageResize.configure({
+            handleColor: '#ffffff', // رنگ دستگیره
+            handleSize: 8,
+          }),
+                    Link,
           TextStyle,
           Color,
           Highlight.configure({ multicolor: true }),
           TextAlign.configure({
             types: ["heading", "paragraph"],
           }),
+         
         ],
         content: value,
         onUpdate: ({ editor }) => onChange(editor.getHTML()),
@@ -219,10 +228,13 @@ const ImageModal = ({editor})=>{
     const {closeModal} = useModal();
 
     const alt = useRef();
-    const imageUrl = useRef();
+
+    const [image, setImage] = useState(null);
 
     const handleAddImage = ()=>{
-        if (imageUrl.current.value) editor.chain().focus().setImage({ src: imageUrl.current.value, alt : alt.current.value, title:alt.current.value }).run();
+
+
+        if (image) editor.chain().focus().setImage({ src: image, alt : alt.current.value, title:alt.current.value }).run();
         closeModal();
     }
 
@@ -232,12 +244,17 @@ const ImageModal = ({editor})=>{
             <Modal>
                 <ModalHeader title = "افزودن تصویر"/>
 
-                <Input ref={imageUrl} label = "Url" placeholder = "آدرس تصویر را وارد کنید"/>
+               
+                <ImageUploader 
+                    api="" 
+                    onUploaded={setImage}
+                    label="آپلود تصویر"
+                />
                 <Input ref={alt} label = "عنوان تصویر" placeholder = "عنوان تصویر را بنویسید"/>
 
                 
                 <div className="w-full mt-6 flex justify-between items-center">
-                    <Button onClick={handleAddImage} title = "افزودن لینک"/>
+                    <Button onClick={handleAddImage} title = "افزودن تصویر"/>
                     <TextButton  title = "بستن" type = "danger" onClick = {closeModal}/>
                 </div>
             </Modal>

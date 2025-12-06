@@ -4,6 +4,7 @@ import { PiShoppingCartSimpleDuotone } from "react-icons/pi";
 import { PiChartPieSliceDuotone } from "react-icons/pi";
 import ProChart from "../components/global/chart";
 import TextEditor from "../components/global/textEditor";
+import { ProductBox } from "../components/global/content-box";
 
 
 export default function HomePage (){
@@ -83,7 +84,28 @@ datasets={datasets}
 dataKey="value"/>
             </div>
 
-            <TextEditor/>
+            <div className="w-full flex items-center gap-2 my-4 flex-col p-2 rounded-lg">
+                <h2 className="w-full text-right font-bold text-xl">
+                    پرفروش‌ترین محصولات
+                </h2>
+
+                <div className="w-full my-5 flex justify-between items-center flex-wrap">
+                    <ProductBox smallTag={"4 فروش"} description={"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است"} title = "آجیل مخلوط" image = {"https://kashaninuts.com/wp-content/uploads/2021/02/AJ70-768x768.jpg"} color = "#a42d32"/>
+
+                    <ProductBox smallTag={"4 فروش"} description={"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است"} title = "آجیل مخلوط" image = {"https://kashaninuts.com/wp-content/uploads/2021/02/AJ70-768x768.jpg"} color = "#a42d32"/>
+
+
+                    <ProductBox smallTag={"4 فروش"} description={"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است"} title = "آجیل مخلوط" image = {"https://kashaninuts.com/wp-content/uploads/2021/02/AJ70-768x768.jpg"} color = "#a42d32"/>
+
+
+                    <ProductBox smallTag={"4 فروش"} description={"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است"} title = "آجیل مخلوط" image = {"https://kashaninuts.com/wp-content/uploads/2021/02/AJ70-768x768.jpg"} color = "#a42d32"/>
+
+
+
+                </div>
+            </div>
+
+            
         </div>
     )
 }
