@@ -14,5 +14,12 @@
     "main_info":{
         "lang":"fa",
         "dir":"rtl"
+    },
+    "auth":{
+        "enable":false,
+        "form_main_title":"ورود به مدیریت",
+        "form_description":"جهت ورود به صفحه مدیریت لطفا نام کاربری و رمز عبور خود را وارد کنید",
+        "request_limit":3,
+        "token_key":"token"
     }
 }

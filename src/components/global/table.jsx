@@ -54,7 +54,7 @@ export default function Table({ columns = [], data = [] }) {
               <th
                 key={col.key || `col-${index}`}
                 onClick={() => handleSort(col)}
-                className={`p-3 ${index === 0 ? "rounded-tr-xl" : ""} ${index === columns.length - 1 ? "rounded-tl-xl" : ""} font-medium text-sm cursor-pointer select-none ${col.sortable ? "hover:bg-gray-200" : ""}`}
+                className={`p-3 ${index === 0 ? "rounded-tr-xl" : ""} ${index === columns.length - 1 ? "rounded-tl-xl" : ""} font-medium text-(--color-text) text-sm cursor-pointer select-none ${col.sortable ? "hover:bg-(--sidebar-bg)" : ""}`}
               >
                 <div className="flex items-center gap-2 justify-start">
                   <span>{col.label}</span>
@@ -71,7 +71,7 @@ export default function Table({ columns = [], data = [] }) {
           {sortedData.map((row, rowIndex) => (
             <tr
               key={rowIndex}
-              className={`${rowIndex === sortedData.length - 1 ? "border-transparent" : "border-black/10"} border-b odd:bg-(--sidebar-bg)/70 even:bg-(--color-primary)/5 transition`}
+              className={`${rowIndex === sortedData.length - 1 ? "border-transparent" : "border-black/10"} border-b odd:bg-(--sidebar-bg)/70 text-(--color-text-sec) even:bg-(--color-primary)/5 transition`}
             >
               {columns.map((col, colIndex) => {
                 // ستون از نوع actions

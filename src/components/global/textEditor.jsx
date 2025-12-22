@@ -11,7 +11,7 @@ import { Modal, ModalComponent, ModalHeader } from "./modal";
 import { Input, Select } from "./input";
 import { useModal } from "../modalProvider";
 import { Button, TextButton } from "./buttons";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import TextAlign from "@tiptap/extension-text-align";
 import { TextStyle } from "@tiptap/extension-text-style";
 import Color from "@tiptap/extension-color";
@@ -20,12 +20,14 @@ import { HexColorPicker } from "react-colorful";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { ImLtr, ImRtl } from "react-icons/im";
 import { FileUploader, ImageUploader } from "./uploader";
+import BubbleMenu from "@tiptap/extension-bubble-menu";
 
 import ImageResize from "tiptap-extension-resize-image";
-
+import { GlobalContext } from "../../App";
 
 
 export default function TextEditor({ value, onChange }) {
+  const {theme} = useContext(GlobalContext)
     const {openModal} = useModal();
     const [savedColor, setSavedColor] = useState("#000000");
 
@@ -66,7 +68,7 @@ export default function TextEditor({ value, onChange }) {
   };
 
   return (
-    <div className="text-editor-container bg-(--sidebar-bg)/70 rounded-xl min-h-56">
+    <div data-theme = {theme} className="text-editor-container w-full bg-(--sidebar-bg)/70 rounded-xl min-h-56">
       <div className="toolbar bg-(--sidebar-bg) border-b border-black/20 p-2 rounded-lg  flex justify-between items-center">
         <button
           className={editor.isActive("bold") ? "active" : ""}
@@ -179,53 +181,54 @@ export default function TextEditor({ value, onChange }) {
   </button>
       </div>
 
-      <EditorContent editor={editor} />
+      <EditorContent className="bg-(--background-bg)" editor={editor} />
     </div>
   );
 }
 
+
 const LinkModal = ({editor})=>{
-    const {closeModal} = useModal();
-    const url = useRef();
-    const selectRef = useRef();
+  const {closeModal} = useModal();
+  const url = useRef();
+  const selectRef = useRef();
 
-    const handleAddLink = ()=>{
-        let followType = selectRef.current.value==1?"follow":'nofollow';
-        
+  const handleAddLink = ()=>{
+      let followType = selectRef.current.value==1?"follow":'nofollow';
+      
 
-        editor.chain().focus().extendMarkRange("link").setLink({ href: url.current.value, rel : followType }).run();
-        closeModal()
-    }
+      editor.chain().focus().extendMarkRange("link").setLink({ href: url.current.value, rel : followType }).run();
+      closeModal()
+  }
 
-    return (
-        <ModalComponent>
+  return (
+      <ModalComponent>
 
-            <Modal>
-                <ModalHeader title = "افزودن لینک"/>
+          <Modal>
+              <ModalHeader title = "افزودن لینک"/>
 
-                <Input ref={url} label = "لینک" placeholder = "لینک خود را وارد کنید"/>
+              <Input ref={url} label = "لینک" placeholder = "لینک خود را وارد کنید"/>
 
-                <Select
-                    ref={selectRef}
-                    label="نوع follow"
-                    placeholder="انتخاب کنید"
-                    options={[
-                        { label: "follow", value: 1 },
-                        { label: "nofollow", value: 2 },
-                    ]}
-                    />
-                <div className="w-full mt-6 flex justify-between items-center">
-                    <Button onClick={handleAddLink} title = "افزودن لینک"/>
-                    <TextButton  title = "بستن" type = "danger" onClick = {closeModal}/>
-                </div>
-            </Modal>
-        </ModalComponent>
-    )
+              <Select
+                  ref={selectRef}
+                  label="نوع follow"
+                  placeholder="انتخاب کنید"
+                  options={[
+                      { label: "follow", value: 1 },
+                      { label: "nofollow", value: 2 },
+                  ]}
+                  />
+              <div className="w-full mt-6 flex justify-between items-center">
+                  <Button onClick={handleAddLink} title = "افزودن لینک"/>
+                  <TextButton  title = "بستن" type = "danger" onClick = {closeModal}/>
+              </div>
+          </Modal>
+      </ModalComponent>
+  )
 }
 
 
 const ImageModal = ({editor})=>{
-    const {closeModal} = useModal();
+    const {closeModal, openModal} = useModal();
 
     const alt = useRef();
 
@@ -240,19 +243,14 @@ const ImageModal = ({editor})=>{
 
     return (
         <ModalComponent>
-
             <Modal>
-                <ModalHeader title = "افزودن تصویر"/>
-
-               
+                <ModalHeader title = "افزودن تصویر"/>    
                 <ImageUploader 
                     api="" 
                     onUploaded={setImage}
                     label="آپلود تصویر"
                 />
-                <Input ref={alt} label = "عنوان تصویر" placeholder = "عنوان تصویر را بنویسید"/>
-
-                
+                <Input ref={alt} label = "عنوان تصویر" placeholder = "عنوان تصویر را بنویسید"/>       
                 <div className="w-full mt-6 flex justify-between items-center">
                     <Button onClick={handleAddImage} title = "افزودن تصویر"/>
                     <TextButton  title = "بستن" type = "danger" onClick = {closeModal}/>

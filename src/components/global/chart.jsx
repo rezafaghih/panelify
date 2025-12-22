@@ -20,9 +20,9 @@ export default function ProChart({ title, datasets, dataKey }) {
   const [activeType, setActiveType] = useState(dataTypes[0]);
 
   return (
-    <div className="bg-white p-4 flex flex-col gap-4 rounded-xl w-full shadow-sm border border-gray-100">
+    <div className="bg-(--sidebar-bg) p-4 flex flex-col gap-4 rounded-xl w-full shadow-sm">
       {/* Header */}
-      <div className="flex items-center justify-between flex-row-reverse">
+      <div className="flex items-center justify-between text-(--color-text) flex-row-reverse">
         <span className="font-bold text-lg">{title}</span>
       </div>
 
@@ -37,7 +37,7 @@ export default function ProChart({ title, datasets, dataKey }) {
               className={`px-3 py-1 rounded-xl text-sm border transition-all duration-200 shadow-sm ${
                 activeType === type
                   ? "bg-blue-600 text-white border-blue-600"
-                  : "bg-white text-gray-600 border-gray-300 hover:bg-gray-100"
+                  : "bg-(--background-bg) text-(--color-text-sec) hover:bg-gray-100"
               }`}
             >
               {type}

@@ -41,7 +41,7 @@ export default function ProductsPage (){
     return (
         <div className="w-[95%] mx-auto my-5">
         <div className="my-4 w-full flex justify-between items-center flex-row-reverse">
-            <span className="font-bold text-2xl">
+            <span className="font-bold text-2xl text-(--color-text)">
                 محصولات
             </span>
             <EmptyButton onClick = {()=>openModal(<AddProductModal/>)} title = "افزودن محصول" color = "(--color-primary)"/>
@@ -66,3 +66,4 @@ const AddProductModal = React.memo(()=>{
         </ModalComponent>
     )
 })
+

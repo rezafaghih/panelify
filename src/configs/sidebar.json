@@ -11,21 +11,31 @@
       "eng_title": "home",
       "icon": "PiListDashesDuotone",
       "path": "/",
-      "uniqID": "BUTTON-1"
+      "family":"داشبورد",
+      "uniqID": "BUTTON-1",
+      "subItems":[]
     },
     {
         "title": "محصولات",
+        "family":"محتوا",
         "eng_title": "products",
         "icon": "PiShoppingCartSimpleDuotone",
         "path": "/products",
-        "uniqID": "BUTTON-2"
+        "uniqID": "BUTTON-2",
+        "subItems":[]
     },
     {
         "title": "مقالات",
         "eng_title": "articles",
         "icon": "PiNotePencilDuotone",
         "path": "/articles",
-        "uniqID": "BUTTON-3"
+        "family":"محتوا",
+        "uniqID": "BUTTON-3",
+        "subItems":[
+          {"title":"ایجاد مقاله جدید", "path":"/create-article"},
+          {"title":"لیست مقالات", "path":"/articles"}
+        ]
     }
+    
   ]
 }

@@ -6,8 +6,30 @@
 
 *{
   font-family: font_regular;
+  transition: all 500ms;
+  /* transition: color 500ms; */
 }
 
+/* برای کل بدنه سایت */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #bdbdbd;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #04498a;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #033a6d;
+}
 
 @font-face {
   font-family: font_regular;

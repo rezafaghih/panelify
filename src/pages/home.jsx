@@ -5,8 +5,13 @@ import { PiChartPieSliceDuotone } from "react-icons/pi";
 import ProChart from "../components/global/chart";
 import TextEditor from "../components/global/textEditor";
 import { ProductBox } from "../components/global/content-box";
+import { Link } from "react-router-dom";
+import { GlobalManagment } from "../../lib/global";
+import { BlurCheckbox } from "../components/global/checkbox";
+import { BsEye } from "react-icons/bs";
+import { PiPen } from "react-icons/pi";
 
-
+import { FaCartPlus } from "react-icons/fa";
 export default function HomePage (){
     const datasets = {
         "7 روزه": [
@@ -70,12 +75,31 @@ export default function HomePage (){
 
     return (
         <div className="w-[95%] mx-auto my-2">
-            <div className="w-full flex items-center gap-2">
-            <StatisticCard href = "/orders" title = "فروش 7 روز گذشته" size = "screen" theValue = "23،000،000 تومان" icon = {<PiChartPieSliceDuotone size = {24}/>}/>
+            <div className="w-full flex lg:flex-row flex-col items-center gap-2">
+            <StatisticCard 
+            description = {
+                <span className="text-sm text-green-500">
+                    17% رشد
+                </span>
+            }
+            href = "/orders" 
+             title = "فروش 7 روز گذشته" size = "screen" theValue = "23،000،000 تومان" icon = {<PiChartPieSliceDuotone size = {24}/>}/>
             
-            <StatisticCard href = "/orders" title = "فروش امروز" size = "screen" theValue = "3،000،000 تومان" icon = {<PiShoppingCartSimpleDuotone size = {24}/>}/>
+            <StatisticCard
+            description = {
+                <span className="text-sm text-green-500">
+                    12% رشد
+                </span>
+            }
+            href = "/orders" title = "فروش امروز" size = "screen" theValue = "3،000،000 تومان" icon = {<PiShoppingCartSimpleDuotone size = {24}/>}/>
 
-            <StatisticCard href = "/users" title = "تعداد کل کاربران" theValue = "4،350" size = "screen" icon = {<PiUserDuotone size = {24}/>}/>
+            <StatisticCard
+            description = {
+                <span className="text-sm text-red-500">
+                    4% کسر
+                </span>
+            }
+            href = "/users" title = "تعداد کل کاربران" theValue = "4،350" size = "screen" icon = {<PiUserDuotone size = {24}/>}/>
             </div>
 
             <div className="w-full flex items-center gap-2 my-4">
@@ -85,20 +109,206 @@ dataKey="value"/>
             </div>
 
             <div className="w-full flex items-center gap-2 my-4 flex-col p-2 rounded-lg">
-                <h2 className="w-full text-right font-bold text-xl">
+                
+
+                <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-2">
+                <div className="w-full gap-2 p-3 flex flex-col items-center bg-(--sidebar-bg) rounded-xl">
+                        <div className="w-full border-b border-gray-500/30 flex justify-between" dir = {GlobalManagment.GlobalConfig().main_info.dir}>
+                            <h2 className=" text-right text-(--color-text) font-bold text-xl">
+                                پروژه ها
+                            </h2>
+                            <Link to = "" className="text-blue-500">
+                                تمامی تسک ها
+                            </Link>
+                        </div>
+
+                        <BlurCheckbox progress={60} progressColor="text-red-500" label = "پروژه شماره یک" avatar={"https://hivoo.ir/assets/img/logo.png"}/>
+                        <BlurCheckbox progress={24} progressColor="text-blue-500" label = "پروژه شماره سه" avatar={"https://hivoo.ir/assets/img/logo.png"}/>
+                        <BlurCheckbox progress={67} progressColor="text-orange-500" label = "پروژه شماره چهار" avatar={"https://hivoo.ir/assets/img/logo.png"}/>
+                        <BlurCheckbox progress={11} progressColor="text-green-500" label = "پروژه شماره پنج" avatar={"https://hivoo.ir/assets/img/logo.png"}/>
+                    </div>
+
+
+                    <div className="w-full gap-2 p-3 flex flex-col items-center bg-(--sidebar-bg) rounded-xl">
+                        <div className="w-full border-b border-gray-500/30 flex justify-between" dir = {GlobalManagment.GlobalConfig().main_info.dir}>
+                            <h2 className=" text-right text-(--color-text) font-bold text-xl">
+                                تسک های امروز
+                            </h2>
+                            <Link to = "" className="text-blue-500">
+                                تمامی تسک ها
+                            </Link>
+                        </div>
+
+                        <BlurCheckbox label = "تسک امروز که باید انجام شود" avatar={"https://hivoo.ir/assets/img/logo.png"}/>
+                        <BlurCheckbox label = "تسک امروز که باید انجام شود" avatar={"https://hivoo.ir/assets/img/logo.png"}/>
+                        <BlurCheckbox label = "تسک امروز که باید انجام شود" avatar={"https://hivoo.ir/assets/img/logo.png"}/>
+                        <BlurCheckbox label = "تسک امروز که باید انجام شود" avatar={"https://hivoo.ir/assets/img/logo.png"}/>
+                    </div>
+
+                    <div className="w-full flex flex-col items-center">
+
+                </div>
+
+                </div>
+            </div>
+
+            <div className="w-full flex items-center gap-2 my-4 flex-col p-2 rounded-lg">
+                <h2 className="w-full text-right font-bold text-(--color-text) text-xl">
                     پرفروش‌ترین محصولات
                 </h2>
 
                 <div className="w-full my-5 flex justify-between items-center flex-wrap">
-                    <ProductBox smallTag={"4 فروش"} description={"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است"} title = "آجیل مخلوط" image = {"https://kashaninuts.com/wp-content/uploads/2021/02/AJ70-768x768.jpg"} color = "#a42d32"/>
+                <ProductBox
+        image="https://hivoo.ir/files/course/66d087d532370.webp"
+        href="/admin/products/react-course"
+        title="دوره جامع React"
+        description="آموزش کامل React از صفر تا سطح پیشرفته به همراه پروژه‌های واقعی"
+        
+        tags={[
+          { label: "Active", color: "green" },
+          { label: "Premium", color: "blue" },
+        ]}
 
-                    <ProductBox smallTag={"4 فروش"} description={"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است"} title = "آجیل مخلوط" image = {"https://kashaninuts.com/wp-content/uploads/2021/02/AJ70-768x768.jpg"} color = "#a42d32"/>
+        stats={[
+          {
+            title: "Sales",
+            value: 231,
+            icon: <FaCartPlus />,
+          },
+          {
+            title: "Views",
+            value: 1420,
+            icon: <BsEye />,
+          },
+        ]}
 
+        actions={[
+          {
+            icon: <PiPen />,
+            color: "#0e6dc7",
+            onClick: () => console.log("Edit product"),
+          },
+          {
+            icon: <BsEye />,
+            color: "#c7960e",
+            onClick: () => console.log("Preview product"),
+          },
+        ]}
+      />
 
-                    <ProductBox smallTag={"4 فروش"} description={"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است"} title = "آجیل مخلوط" image = {"https://kashaninuts.com/wp-content/uploads/2021/02/AJ70-768x768.jpg"} color = "#a42d32"/>
+<ProductBox
+        image="https://hivoo.ir/files/course/66d087d532370.webp"
+        href="/admin/products/react-course"
+        title="دوره جامع React"
+        description="آموزش کامل React از صفر تا سطح پیشرفته به همراه پروژه‌های واقعی"
+        
+        tags={[
+          { label: "Active", color: "green" },
+          { label: "Premium", color: "blue" },
+        ]}
 
+        stats={[
+          {
+            title: "Sales",
+            value: 231,
+            icon: <FaCartPlus />,
+          },
+          {
+            title: "Views",
+            value: 1420,
+            icon: <BsEye />,
+          },
+        ]}
 
-                    <ProductBox smallTag={"4 فروش"} description={"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است"} title = "آجیل مخلوط" image = {"https://kashaninuts.com/wp-content/uploads/2021/02/AJ70-768x768.jpg"} color = "#a42d32"/>
+        actions={[
+          {
+            icon: <PiPen />,
+            color: "#0e6dc7",
+            onClick: () => console.log("Edit product"),
+          },
+          {
+            icon: <BsEye />,
+            color: "#c7960e",
+            onClick: () => console.log("Preview product"),
+          },
+        ]}
+      />
+
+<ProductBox
+        image="https://hivoo.ir/files/course/66d087d532370.webp"
+        href="/admin/products/react-course"
+        title="دوره جامع React"
+        description="آموزش کامل React از صفر تا سطح پیشرفته به همراه پروژه‌های واقعی"
+        
+        tags={[
+          { label: "Active", color: "green" },
+          { label: "Premium", color: "blue" },
+        ]}
+
+        stats={[
+          {
+            title: "Sales",
+            value: 231,
+            icon: <FaCartPlus />,
+          },
+          {
+            title: "Views",
+            value: 1420,
+            icon: <BsEye />,
+          },
+        ]}
+
+        actions={[
+          {
+            icon: <PiPen />,
+            color: "#0e6dc7",
+            onClick: () => console.log("Edit product"),
+          },
+          {
+            icon: <BsEye />,
+            color: "#c7960e",
+            onClick: () => console.log("Preview product"),
+          },
+        ]}
+      />
+
+<ProductBox
+        image="https://hivoo.ir/files/course/66d087d532370.webp"
+        href="/admin/products/react-course"
+        title="دوره جامع React"
+        description="آموزش کامل React از صفر تا سطح پیشرفته به همراه پروژه‌های واقعی"
+        
+        tags={[
+          { label: "Active", color: "green" },
+          { label: "Premium", color: "blue" },
+        ]}
+
+        stats={[
+          {
+            title: "Sales",
+            value: 231,
+            icon: <FaCartPlus />,
+          },
+          {
+            title: "Views",
+            value: 1420,
+            icon: <BsEye />,
+          },
+        ]}
+
+        actions={[
+          {
+            icon: <PiPen />,
+            color: "#0e6dc7",
+            onClick: () => console.log("Edit product"),
+          },
+          {
+            icon: <BsEye />,
+            color: "#c7960e",
+            onClick: () => console.log("Preview product"),
+          },
+        ]}
+      />
 
 
 

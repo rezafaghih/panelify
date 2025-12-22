@@ -1,12 +1,14 @@
 import React from "react";
 import GlobalConfig from "../../configs/global.json"
-import { CgClose } from "react-icons/cg";
+import { CgClose, CgSpinner } from "react-icons/cg";
 import { useModal } from "../modalProvider";
 
-export const ModalComponent = React.memo(({children})=>{
+export const ModalComponent = React.memo(({children, loading = true})=>{
     return (
         <div className="w-full h-screen flex items-center justify-center fixed left-0 top-0 z-20 backdrop-blur-sm bg-(--background-bg)/10">
-            {children}
+            {
+                loading? children :<CgSpinner className="text-3xl animate-spin"/>
+            }
         </div>
     )
 })
@@ -23,7 +25,10 @@ export const Modal = React.memo(({size = "md", children})=>{
     size=="screen"&&widthSize==""?widthSize="w-11/12":"";
 
     return (
-        <div className={`${widthSize}  p-2 bg-(--sidebar-bg) rounded-xl drop-shadow-2xl drop-shadow-black/10`}>
+        <div className={`${widthSize} max-h-[95vh] overflow-y-auto p-2 bg-(--sidebar-bg) rounded-xl drop-shadow-2xl drop-shadow-black/10`}>
+            {/* {
+                loading? children :<CgSpinner className="text-3xl animate-spin"/>
+            } */}
             {children}
         </div>  
     )

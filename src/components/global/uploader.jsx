@@ -51,11 +51,12 @@ async function handleUpload(file, apiUrl, onProgress) {
 }
 
 // ---------- Image Uploader ----------
-export function ImageUploader({ apiUrl, onUploaded }) {
+
+export function ImageUploader({ apiUrl, onUploaded, manualUpload = false , defaultPreview = null}) {
   const [progress, setProgress] = useState(0);
   const [loading, setLoading] = useState(false);
   const [fileName, setFileName] = useState("");
-  const [preview, setPreview] = useState(null);
+  const [preview, setPreview] = useState(defaultPreview);
 
   const onSelectFile = async (e) => {
     const file = e.target.files[0];
@@ -65,13 +66,17 @@ export function ImageUploader({ apiUrl, onUploaded }) {
     setLoading(true);
     setProgress(0);
     const localPreview = URL.createObjectURL(file);
-setPreview(localPreview);
+    setPreview(localPreview);
 
     try {
-      const url = await handleUpload(file, apiUrl, setProgress);
-      
-
-      if (onUploaded) onUploaded(url);
+      if (manualUpload) {
+        // فقط فایل برگردانده می‌شود، آپلود انجام نمی‌شود
+        if (onUploaded) onUploaded(file);
+      } else {
+        // حالت قبلی: آپلود از طریق API
+        const url = await handleUpload(file, apiUrl, setProgress);
+        if (onUploaded) onUploaded(url);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -83,30 +88,28 @@ setPreview(localPreview);
     <div className="w-full text-right">
       <h2 className="text-lg font-bold mb-3 text-gray-800">افزودن تصویر</h2>
 
-      <label className="w-full h-32 border-dashed border border-gray-400 flex items-center justify-center bg-gray-100 rounded-xl cursor-pointer text-gray-600 hover:bg-gray-200 transition overflow-hidden">
+      <label className="w-full h-32 border-dashed border border-gray-400 flex items-center justify-center bg-(--background-bg) rounded-xl cursor-pointer text-gray-600 hover:bg-(--color-primary)/10 transition overflow-hidden">
+        {preview ? (
+          <img 
+            src={preview} 
+            alt="preview" 
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <span>انتخاب تصویر</span>
+        )}
 
-{/* اگر تصویر انتخاب شده باشد → عکس را نشان بده */}
-{preview ? (
-  <img 
-    src={preview} 
-    alt="preview" 
-    className="w-full h-full object-cover"
-  />
-) : (
-  <span>انتخاب تصویر</span>
-)}
-
-<input
-  type="file"
-  accept="image/*"
-  onChange={onSelectFile}
-  className="hidden"
-/>
-</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={onSelectFile}
+          className="hidden"
+        />
+      </label>
 
       {fileName && <p className="text-sm text-gray-500 mt-2">{fileName}</p>}
 
-      {loading && (
+      {!manualUpload && loading && (
         <motion.div
           initial={{ width: 0 }}
           animate={{ width: progress + "%" }}

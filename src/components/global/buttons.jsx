@@ -7,10 +7,16 @@ import { PiTicketDuotone } from "react-icons/pi";
 import { AiTwotoneNotification } from "react-icons/ai";
 import { GlobalManagment } from "../../../lib/global";
 
-export const Button = React.memo(({title, onClick, size = "fit",color = "bg-(--color-primary)"})=>{
+export const Button = React.memo(({title, onClick, size = "fit",color = "#4293f5", icon = null})=>{
+    const bg = GlobalManagment.applyOpacity(color, 1);
+
     return (
-        <button className={` ${color} rounded-xl hover:scale-105 transition-all cursor-pointer active:scale-90 text-white ${size=="fit"?"px-2  py-3":"w-full py-3"}`} onClick={onClick}>
+        <button style={{
+            backgroundColor: bg,
+          }} className={`rounded-xl hover:scale-105 text-center justify-center flex items-center gap-2 transition-all cursor-pointer active:scale-90 text-white ${size=="fit"?"px-2  py-3":"w-full py-3"}`} onClick={onClick}>
             {title}
+
+            {icon?icon:""}
         </button>
     )
 })

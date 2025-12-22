@@ -7,7 +7,7 @@ export const Layout = ()=>{
     return (
         <div className={`bg-(--background-bg) w-full h-screen flex ${GlobalConfig.main_info.dir=="rtl"?"flex-row-reverse":"flex-row"} `}>
             <Sidebar/>
-            <div className="w-4/5 h-full overflow-auto">
+            <div className="w-[98%] mx-auto lg:w-4/5 h-full overflow-auto">
             <TobBar/>
             <Outlet/>
             </div>

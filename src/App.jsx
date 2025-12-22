@@ -1,19 +1,31 @@
 import { useState , createContext, useEffect} from 'react'
 import './App.css'
-import HomePage from './pages/home'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Layout } from './components/layout'
-import MainConfing from "./configs/global.json"
 import { GlobalManagment } from '../lib/global'
-import NotFoundPage from './pages/404'
 
-import { ModalProvider } from './components/modalProvider'
+// pages
+// note : صفحات داشبورد را قبل از استفاده ایمپورت کنید و حتما در زمان تعریف صفحه زیر مجموعه AuthGuard قرارشان بدهید
+import NotFoundPage from './pages/404'
 import ProductsPage from './pages/products'
+import BasicAuthPage from './pages/auth'
+import HomePage from './pages/home'
+import CreateArticle from './pages/create-article'
+import ArticlesPage from './pages/articles'
+
+// Global context
+// note : بهتر است کانتکس های پیش فرض را تغییر ندهید زیرا بخش مهمی مانند احراز هویت ، نمایش اعلان و ... به این موارد بستگی دارد
+import { ModalProvider } from './components/modalProvider'
+import AuthGuard from './components/authGurd'
+import { ToastProvider } from './components/global/toast'
+import { AuthProvider } from './components/authContext'
+
+
 export const GlobalContext = createContext()
 
 function App() {
   const [theme, setTheme] = useState(GlobalManagment.getColorTheme());
-
+  const MainConfing = GlobalManagment.GlobalConfig();
 
   useEffect(() => {
     const color_sidebar = theme === "light"
@@ -46,19 +58,32 @@ function App() {
     <>
 
       <BrowserRouter>
+      <AuthProvider>
+        <ToastProvider>
         <GlobalContext.Provider value={{theme, setTheme}}>
         <ModalProvider>
         <Routes>
+        <Route path = "/auth" element = {<BasicAuthPage/>}/>
         <Route element = {<NotFoundPage/>} path='*'/>
 
-          <Route element = {<Layout/>} path='/'>
-            <Route index element = {<HomePage/>}/>
-            <Route path = "/products" element = {<ProductsPage/>}/>
+          {
+            /**
+             * add your page as AuthGuard Component child when you are making route
+             */
+          }
 
+          <Route element = {<AuthGuard><Layout/></AuthGuard> } path='/'>
+            <Route index element = {<AuthGuard><HomePage/></AuthGuard>}/>
+            <Route path = "/products" element = {<AuthGuard><ProductsPage/></AuthGuard>}/>
+            <Route path = "/create-article" element = {<AuthGuard><CreateArticle/></AuthGuard>}/>
+            <Route path = "/articles" element = {<AuthGuard><ArticlesPage/></AuthGuard>}/>
+            
           </Route>
         </Routes>
         </ModalProvider>
         </GlobalContext.Provider>
+        </ToastProvider>
+        </AuthProvider>
       </BrowserRouter>
     </>
   )
