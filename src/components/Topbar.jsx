@@ -12,7 +12,7 @@ import { TopbarThemeButton } from "./Topbar-light-dark-mode"
 export const TobBar = ()=>{
     const {openModal} = useModal();
     return (
-        <div className="w-full lg:w-[95%] sticky top-8 my-10 mt-2 rounded-xl mx-auto h-14 bg-(--sidebar-bg) flex flex-row-reverse items-center p-3">
+        <div className="w-full lg:w-[95%] sticky top-8 my-10 mt-2 rounded-xl mx-auto h-14 bg-(--sidebar-bg) flex flex-row-reverse items-center p-3 shadow z-20">
 
             <div className="w-2/4 gap-3 flex-row-reverse flex justify-start items-center">
             <TopBarSearchButton />

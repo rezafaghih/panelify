@@ -35,6 +35,18 @@
           {"title":"ایجاد مقاله جدید", "path":"/create-article"},
           {"title":"لیست مقالات", "path":"/articles"}
         ]
+    },
+    {
+        "title": "کاربران",
+        "eng_title": "articles",
+        "icon": "PiNotePencilDuotone",
+        "path": "/users",
+        "family":"کاربران",
+        "uniqID": "BUTTON-3",
+        "subItems":[
+          {"title":"لیست کاربران", "path":"/create-article"},
+          {"title":"پیام ها", "path":"/articles"}
+        ]
     }
     
   ]

@@ -1,110 +1,186 @@
-# Panelify — A Modern React Dashboard & Admin Panel Template
+# داشبورد Panelify
 
-**Panelify** is a fully customizable React-based dashboard and admin panel template designed to help developers build user management systems, account dashboards, and admin interfaces with maximum speed and minimal effort.
+## معرفی
 
-Creating a complete dashboard UI is often time-consuming and repetitive. Panelify solves this problem by offering a clean architecture, pre-built components, flexible layouts, and complete customization options—allowing you to focus on functionality instead of UI boilerplate.
-
----
-
-## 🚀 Key Features
-
-- ⚡ React-powered architecture for fast and modern development  
-- 🎨 Fully customizable components (colors, titles, layout, widgets, etc.)  
-- 🧩 Modular design system for building pages exactly how you want  
-- 📁 Easy page creation workflow using configuration files  
-- 🧱 Includes layout system, sidebar navigation, icons support, and reusable UI blocks  
-- 🔧 Perfect for dashboards, management systems, CRMs, analytics pages, and more  
+Panelify یک داشبورد آماده و قابل شخصی‌سازی است که پس از دریافت سورس‌کد آن، می‌توانید متناسب با نیاز پروژه خود آن را تنظیم و توسعه دهید. این داشبورد برای پروژه‌های فارسی و انگلیسی طراحی شده و از ساختار ماژولار و منعطفی برخوردار است.
 
 ---
 
-## 🧠 How Panelify Works
+## ساختار Config
 
-Panelify is built around three core layers:
+برای شروع شخصی‌سازی داشبورد، ابتدا باید تنظیمات اولیه را در دایرکتوری **Config** انجام دهید.
 
-### 1. Page Structure  
-Create new dashboard pages easily with reusable layout templates.
+### Global.json
 
-### 2. Dashboard Customization  
-Adjust the main title, theme colors, layout styles, and UI appearance directly from config files.
+در این فایل، اطلاعات پایه و سراسری داشبورد تعریف می‌شود:
 
-### 3. Reusable Components  
-Use pre-built, fully customizable components to create any page structure quickly.
+* **Colors**
+  لیست رنگ‌های اصلی داشبورد که در بخش‌های مختلف استفاده می‌شوند.
 
-This architecture helps you build complex dashboards faster, cleaner, and without repetitive UI coding.
+* **Main_info**
+  شامل تنظیمات عمومی مانند:
+
+  * زبان پیش‌فرض داشبورد
+  * جهت نمایش (RTL برای داشبورد فارسی و LTR برای داشبورد انگلیسی)
+
+* **Auth**
+  تنظیمات مربوط به احراز هویت:
+
+  * اگر مقدار `enable` برابر با `true` باشد و مقدار `token_key` در کوکی‌ها ذخیره نشده باشد، کاربر به‌صورت خودکار به صفحه احراز هویت هدایت می‌شود.
 
 ---
 
-## 📦 Installation
+### Sidebar.json
 
-Make sure you have:
+این فایل مربوط به تنظیمات سایدبار داشبورد است.
 
-- Node.js v20+ installed
+#### Main_info
 
-### Step 1 — Clone the project
-```bash
-git clone https://github.com/rezafaghih/panelify.git
+در این بخش موارد زیر تعریف می‌شوند:
+
+* عنوان اصلی داشبورد (مثلاً: «مدیریت وبسایت کندو»)
+* لوگوی حالت **Dark Mode** و **Light Mode**
+
+**نکته:** فایل لوگو باید حتماً داخل دایرکتوری `public` قرار بگیرد.
+
+#### Buttons
+
+برای تعریف دکمه‌های سایدبار، باید از بخش `buttons` استفاده کنید. هر دکمه شامل تنظیمات زیر است:
+
+* **title**
+  عنوان دکمه
+
+* **icon**
+  آیکن دکمه که نام آن باید از پکیج `react-icons` انتخاب شود.
+  در صورتی که آیکن نمایش داده نشد یا با خطا مواجه شدید، باید آن را در فایل `iconMapper.js` ایمپورت کنید.
+
+* **path**
+  مسیر صفحه‌ای که دکمه به آن هدایت می‌شود.
+
+* **family**
+  گروه یا خانواده دکمه. اگر چند دکمه دارای یک family مشترک باشند (مثلاً «کاربران»)، زیر یک عنوان گروه‌بندی می‌شوند.
+
+* **uniqID**
+  شناسه یکتا برای هر دکمه که باید با سایر دکمه‌ها متفاوت باشد.
+
+* **subItems**
+  لیست دکمه‌های زیرمجموعه. در صورتی که یک دکمه دارای فرزند باشد، می‌توانید برای هر آیتم مقادیر `title` و `path` را تعریف کنید.
+
+**نکته مهم:**
+برای هر صفحه‌ای که ایجاد می‌کنید، باید یک فایل در دایرکتوری `pages` بسازید، آن را در فایل `App.jsx` ایمپورت کنید و در بخش `Routes` تعریف نمایید. در غیر این صورت، صفحه موردنظر در دسترس نخواهد بود.
+
+---
+
+## احراز هویت صفحات
+
+اگر می‌خواهید یک صفحه شامل احراز هویت باشد، باید کامپوننت مربوط به آن صفحه را در بخش `Route` زیرمجموعه‌ی `AuthGuard` قرار دهید.
+
+---
+
+## کامپوننت‌ها
+
+Panelify شامل بیش از **100 کامپوننت شخصی‌سازی‌شده** است که فرآیند توسعه داشبورد را سریع‌تر و حرفه‌ای‌تر می‌کند.
+
+### Topbar.js
+
+کامپوننت نوار بالایی داشبورد که معمولاً در فایل `layout.js` استفاده می‌شود.
+به‌صورت پیش‌فرض:
+
+* یک تاپ‌بار Sticky ایجاد می‌کند
+* همراه با اسکرول صفحه حرکت می‌کند
+* امکان افزودن کامپوننت‌های دلخواه درون تاپ‌بار را فراهم می‌سازد
+
+### TopBarSearchButton
+
+این کامپوننت یک دکمه جستجو به همراه یک مودال از پیش تعریف‌شده ایجاد می‌کند که می‌توانید آن را به‌دلخواه خود شخصی‌سازی کنید.
+
+### TopbarAlarms
+
+نمایش اعلان‌های مربوط به حساب کاربری (ادمین یا کاربر) به‌صورت Popover در داشبورد.
+
+### TopBarThemeButton
+
+دکمه تغییر تم داشبورد بین حالت **Dark Mode** و **Light Mode**.
+همچنین می‌توانید بر اساس این کامپوننت، سیستم تغییر تم اختصاصی خودتان را پیاده‌سازی کنید.
+
+### ProfileButton
+
+کامپوننت نمایش پروفایل کاربر که امکانات زیر را فراهم می‌کند:
+
+* نمایش تصویر پروفایل
+* دسترسی به تنظیمات حساب کاربری
+* خروج از حساب کاربری و سایر عملیات مرتبط
+
+---
+
+## ImageUploader Component
+
+### معرفی
+
+کامپوننت `ImageUploader` برای آپلود تصاویر در داشبورد طراحی شده است و امکان آپلود خودکار تصویر روی سرور یا دریافت دستی فایل را در اختیار شما قرار می‌دهد.
+
+### نحوه استفاده
+
+```
+<ImageUploader
+  apiUrl=""
+  onUploaded={setFile}
+  manualUpload={false}
+  defaultPreview={false}
+/>
 ```
 
-### Step 2 — Install dependencies
+### Props
 
-```bash
-cd panelify
-npm install
+* **apiUrl**
+  آدرس API جهت آپلود خودکار تصویر روی سرور.
+
+* **onUploaded**
+  یک state یا تابع callback که پس از آپلود (یا انتخاب فایل) اطلاعات فایل را دریافت می‌کند.
+
+* **manualUpload**
+  اگر مقدار آن `true` باشد، تصویر به‌صورت خودکار روی سرور آپلود نمی‌شود و فقط اطلاعات فایل از طریق `onUploaded` برگردانده می‌شود تا بتوانید به‌صورت دستی از آن استفاده کنید.
+
+* **defaultPreview**
+  یک URL تصویر دریافت می‌کند و برای نمایش تصویر پیش‌فرض (مثلاً در حالت ویرایش) استفاده می‌شود.
+
+---
+
+## Button Component
+
+### معرفی
+
+کامپوننت `Button` برای ایجاد دکمه‌های قابل شخصی‌سازی در داشبورد استفاده می‌شود.
+
+### نحوه استفاده
+
+```
+<Button
+  Title="عنوان دکمه"
+  Icon={<Icon />}
+  Size="fit"
+  Color="#f33333"
+  onClick={() => alert('HI')}
+/>
 ```
 
+### Props
 
-### Step 3 — Start the development server
-```bash
-npm run dev
-```
-Your Panelify project is now running locally.
+* **Title**
+  متن یا محتوای دکمه. می‌تواند یک string ساده، تگ HTML یا حتی یک کامپوننت React باشد.
 
-## Routing System in Panelify
-Panelify uses a simple and efficient two-step routing configuration.
+* **Icon**
+  آیکن دکمه. در صورتی که این مقدار تعریف نشود، دکمه بدون آیکن نمایش داده می‌شود.
+  آیکن باید از پکیج `react-icons` باشد.
 
-### ✅ Step 1 — Add a new sidebar button
-Open the file:
-```bash
-src/configs/sidebar.json
-```
-Inside the buttons array, add a new object like this:
-```json
-{
-  "title": "خانه",
-  "eng_title": "home",
-  "icon": "PiListDashesDuotone",
-  "path": "/",
-  "uniqID": "BUTTON-1"
-}
-```
+* **onClick**
+  تابعی که هنگام کلیک روی دکمه اجرا می‌شود.
 
-## 📌 Button Field Definitions
+* **Color**
+  رنگ دکمه (به‌صورت HEX یا مقدار CSS معتبر).
 
-| Field      | Description |
-|------------|-------------|
-| **title**      | The main (Persian) display title of the button |
-| **eng_title**  | English title (useful for multilingual dashboards) |
-| **icon**       | Icon name from `react-icons` (e.g., `FaHome`, `PiUserDuotone`) |
-| **path**       | URL path of the page |
-| **uniqID**     | Unique identifier for the button (avoid duplicates) |
+* **Size**
+  تعیین‌کننده اندازه دکمه:
 
-After adding the button, Panelify automatically includes it in the sidebar navigation.
-
-### 🛠 Customization Options
-
-Panelify supports full customization, including:
-
-Theme colors
-
-Sidebar items
-
-Page titles
-
-Layout structure
-
-Icons via react-icons
-
-Component arrangements
-
-Easily adapt Panelify to match any brand or product style.
-
+  * `fit` : دکمه به اندازه محتوای داخلی خود نمایش داده می‌شود
+  * `screen` : دکمه تمام عرض کانتینر والد را اشغال می‌کند

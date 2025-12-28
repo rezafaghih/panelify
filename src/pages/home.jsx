@@ -11,7 +11,10 @@ import { BlurCheckbox } from "../components/global/checkbox";
 import { BsEye } from "react-icons/bs";
 import { PiPen } from "react-icons/pi";
 
+
 import { FaCartPlus } from "react-icons/fa";
+import OrbitSphere from "../components/global/OrbitSphere";
+import { GridLayout } from "../components/global/layout_components";
 export default function HomePage (){
     const datasets = {
         "7 روزه": [
@@ -75,32 +78,33 @@ export default function HomePage (){
 
     return (
         <div className="w-[95%] mx-auto my-2">
-            <div className="w-full flex lg:flex-row flex-col items-center gap-2">
-            <StatisticCard 
-            description = {
-                <span className="text-sm text-green-500">
-                    17% رشد
-                </span>
-            }
-            href = "/orders" 
-             title = "فروش 7 روز گذشته" size = "screen" theValue = "23،000،000 تومان" icon = {<PiChartPieSliceDuotone size = {24}/>}/>
-            
-            <StatisticCard
-            description = {
-                <span className="text-sm text-green-500">
-                    12% رشد
-                </span>
-            }
-            href = "/orders" title = "فروش امروز" size = "screen" theValue = "3،000،000 تومان" icon = {<PiShoppingCartSimpleDuotone size = {24}/>}/>
+            <GridLayout countOfCols={3} gapX={4} mobileCountOfCols={1}>
+              <StatisticCard 
+              description = {
+                  <span className="text-sm text-green-500">
+                      17% رشد
+                  </span>
+              }
+              href = "/orders" 
+              title = "فروش 7 روز گذشته" size = "screen" theValue = "23،000،000 تومان" icon = {<PiChartPieSliceDuotone size = {24}/>}/>
+              
+              <StatisticCard
+              description = {
+                  <span className="text-sm text-green-500">
+                      12% رشد
+                  </span>
+              }
+              href = "/orders" title = "فروش امروز" size = "screen" theValue = "3،000،000 تومان" icon = {<PiShoppingCartSimpleDuotone size = {24}/>}/>
 
             <StatisticCard
-            description = {
-                <span className="text-sm text-red-500">
-                    4% کسر
-                </span>
-            }
-            href = "/users" title = "تعداد کل کاربران" theValue = "4،350" size = "screen" icon = {<PiUserDuotone size = {24}/>}/>
-            </div>
+              description = {
+                  <span className="text-sm text-red-500">
+                      4% کسر
+                  </span>
+              }
+              href = "/users" title = "تعداد کل کاربران" theValue = "4،350" size = "screen" icon = {<PiUserDuotone size = {24}/>}/>
+            </GridLayout>
+           
 
             <div className="w-full flex items-center gap-2 my-4">
             <ProChart title="آمار فروش ماه اخیر"
@@ -110,8 +114,7 @@ dataKey="value"/>
 
             <div className="w-full flex items-center gap-2 my-4 flex-col p-2 rounded-lg">
                 
-
-                <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-2">
+                <GridLayout gapX={2} countOfCols={2} mobileCountOfCols={1}>
                 <div className="w-full gap-2 p-3 flex flex-col items-center bg-(--sidebar-bg) rounded-xl">
                         <div className="w-full border-b border-gray-500/30 flex justify-between" dir = {GlobalManagment.GlobalConfig().main_info.dir}>
                             <h2 className=" text-right text-(--color-text) font-bold text-xl">
@@ -144,12 +147,8 @@ dataKey="value"/>
                         <BlurCheckbox label = "تسک امروز که باید انجام شود" avatar={"https://hivoo.ir/assets/img/logo.png"}/>
                         <BlurCheckbox label = "تسک امروز که باید انجام شود" avatar={"https://hivoo.ir/assets/img/logo.png"}/>
                     </div>
-
-                    <div className="w-full flex flex-col items-center">
-
-                </div>
-
-                </div>
+                </GridLayout>
+                
             </div>
 
             <div className="w-full flex items-center gap-2 my-4 flex-col p-2 rounded-lg">
@@ -314,7 +313,6 @@ dataKey="value"/>
 
                 </div>
             </div>
-
             
         </div>
     )
